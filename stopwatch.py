@@ -19,11 +19,21 @@ def Start(label):
     counter_label(label)
     start['state']='disabled'
     stop['state']='normal'
+    reset['state']='normal'
 def Stop():
     global running
     start['state']='normal'
     stop['state']='disabled'
+    reset['state']='normal'
     running=False
+def Reset(lable):
+    global counter
+    counter=-1
+    if running==False:
+        reset['state']='disabled'
+        label['text']="WELCOME!"
+    else:
+        label['text']='STARTING...'
 
 root=Tkinter.Tk()
 root.title("STOPWATCH")
@@ -34,7 +44,9 @@ label.pack()
 start=Tkinter.Button(root,text='START',width=15,command=lambda:Start(label))
 start.pack()
 stop=Tkinter.Button(root,text="STOP",width=15,state="disabled",command=Stop)
-
 stop.pack()
+reset=Tkinter.Button(root,text="RESET",width=15,state="disabled",command=lambda:Reset(label))
+reset.pack()
+
 root.mainloop()
 
