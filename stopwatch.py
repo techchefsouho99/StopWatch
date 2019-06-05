@@ -1,8 +1,6 @@
 import tkinter as Tkinter
-
 counter =-1
 runnning=False
-
 def counter_label(label):
     def count():
         if running:
@@ -15,21 +13,28 @@ def counter_label(label):
             label.after(1000,count)
             counter+=1
     count()
-
-
 def Start(label):
     global running
     running=True
     counter_label(label)
     start['state']='disabled'
-
+    stop['state']='normal'
+def Stop():
+    global running
+    start['state']='normal'
+    stop['state']='disabled'
+    running=False
 
 root=Tkinter.Tk()
 root.title("STOPWATCH")
+
 root.minsize(width=250,height=70)
 label=Tkinter.Label(root,text="WELCOME!",fg="black",font="Verdana 30 bold")
 label.pack()
 start=Tkinter.Button(root,text='START',width=15,command=lambda:Start(label))
 start.pack()
+stop=Tkinter.Button(root,text="STOP",width=15,state="disabled",command=Stop)
+
+stop.pack()
 root.mainloop()
 
